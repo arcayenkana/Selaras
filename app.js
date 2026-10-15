@@ -370,17 +370,30 @@ function randNick(){
 
 /* ---------- Sambutan dan profil ---------- */
 function vWelcome(){
-  function vp(c,i,t,d){return '<div class="vp"><span class="glyph" style="--c:'+c+'">'+ic(i)+'</span><div><b>'+t+'</b><div class="small muted">'+d+'</div></div></div>';}
+  function step(n,c,t,d){return '<div class="stp"><span class="sn" style="--c:'+c+'">'+n+'</span><div><b>'+t+'</b><div class="muted">'+d+'</div></div></div>';}
+  function why(t){return '<li>'+t+'</li>';}
   return '<div class="kv full welcome">'+kvArt()+topbar(true)+'<div class="kvtxt"><p class="hello">Selamat datang di Selaras</p><h1>Kenali dirimu. Jaga perasaanmu.</h1>'+
-   '<p style="margin:10px 0 0">Belajar tentang emosi, hubungan yang sehat, batasan tubuh, dan pengembangan diri. Gratis, anonim, dan cukup 5 menit sekali buka.</p>'+
-   '<div class="row" style="margin-top:18px"><button class="btn onkv" data-a="start">Mulai sekarang</button><button class="btn onkv2" data-a="nav" data-v="faq">'+ic("help")+' Baca FAQ</button></div></div></div>'+
-  '<div class="stack"><div class="card wallet">'+
-   vp("var(--m-emosi)","book","6 modul singkat","Emosi, cemas, citra diri, bullying, kekerasan seksual, dan pengembangan diri, lengkap dengan kuis.")+
-   vp("var(--m-diri)","heart","Check-in harian","Cek perasaanmu dan dapat saran kecil yang bisa langsung dicoba.")+
-   vp("var(--seg-kolab)","trophy","Poin, badge, dan peringkat","Belajar jadi lebih seru, tetap memakai nama panggilan.")+
-  '</div>'+
-  ''+
-  '<p class="small muted">Selaras adalah materi edukasi, bukan pengganti psikolog atau konselor. Kalau kamu butuh bicara sekarang, tombol Bantuan ada di pojok atas.</p></div>';
+   '<p style="margin:12px 0 0">Belajar singkat tentang emosi, batas tubuh, dan pengembangan diri. Gratis dan anonim.</p>'+
+   '<div class="row" style="margin-top:22px"><button class="btn onkv" data-a="start">Mulai sekarang</button><button class="btn onkv2" data-a="why">Kenapa ini penting?</button></div></div></div>'+
+  '<div class="story">'+
+   '<section id="why"><p class="kicker">Masalahnya</p><h2>Banyak remaja menghadapinya sendirian</h2>'+
+    '<div class="fact"><b>1 dari 3</b><p>remaja usia 10–17 tahun di Indonesia mengalami masalah kesehatan mental.<sup>1</sup></p></div>'+
+    '<div class="fact"><b>2,6%</b><p>dari remaja bermasalah itu yang pernah memakai layanan atau konseling.<sup>1</sup></p></div>'+
+    '<div class="fact"><b>8 dari 100</b><p>remaja usia 13–17 tahun pernah mengalami kekerasan seksual, di antara laki-laki maupun perempuan.<sup>2</sup></p></div>'+
+   '</section>'+
+   '<section><p class="kicker">Kenapa bisa begitu</p><h2>Bukan karena mereka tidak peduli</h2>'+
+    '<ul class="why">'+why('Belum punya kata untuk menyebut apa yang dirasakan.')+why('Takut dicap lemah, aneh, atau lebay.')+why('Tidak tahu harus bercerita ke siapa, atau ke mana mencari bantuan.')+'</ul>'+
+    '<p class="muted">Akibatnya, masalah yang masih kecil dipendam sampai terasa besar.</p></section>'+
+   '<section><p class="kicker">Yang Selaras lakukan</p><h2>Satu langkah awal, dalam 5 menit</h2>'+
+    step(1,'var(--m-emosi)','Kenali','Enam modul singkat: emosi, cemas, citra diri, bullying, kekerasan seksual, dan pengembangan diri.')+
+    step(2,'var(--m-diri)','Latih','Check-in harian dan tantangan kecil yang mudah dicoba.')+
+    step(3,'var(--m-bully)','Cari bantuan','Tahu siapa dan ke mana harus pergi saat butuh bicara.')+
+   '</section>'+
+   '<section class="endcta"><button class="btn primary block" data-a="start">Mulai sekarang</button>'+
+    '<button class="btn ghost block" data-a="nav" data-v="faq">Baca pertanyaan umum</button>'+
+    '<p class="small muted">Selaras adalah materi edukasi, bukan pengganti psikolog atau konselor. Kalau kamu butuh bicara sekarang, tombol Bantuan ada di pojok atas.</p>'+
+    '<p class="small muted src"><sup>1</sup> I-NAMHS 2022, survei nasional kesehatan mental remaja usia 10–17 tahun (UGM dan mitra). <sup>2</sup> SNPHAR 2024, KemenPPPA: kekerasan seksual seumur hidup pada usia 13–17 tahun, sekitar 8% pada anak laki-laki dan 9% pada anak perempuan.</p></section>'+
+  '</div>';
 }
 function vOnb(){
   var editing=!!S.nick,complete=editing&&!S.seg;
@@ -910,6 +923,7 @@ var H={
  sendSurvey:function(){if(SV.a&&SV.b&&SV.c&&SV.d&&SV.e){S.puas={a:SV.a,b:SV.b,c:SV.c,d:SV.d,e:SV.e};afterChange("+20 poin, terima kasih");render();}},
  resetAsk:function(){resetConfirm=true;render();},
  svOpen:function(){svOpen=true;render();},
+ why:function(){var e=document.getElementById("why");if(e)e.scrollIntoView({behavior:window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});},
  resetNo:function(){resetConfirm=false;render();},
  resetYes:function(){
    var ref=docRef;docRef=null;clearTimeout(syncT);
