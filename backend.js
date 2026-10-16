@@ -4,7 +4,7 @@
 (function () {
   "use strict";
   var C = window.SELARAS_CONFIG || {};
-  var BASE = (C.backendUrl || "").trim();
+  var BASE = (C.backendUrl || "https://script.google.com/macros/s/AKfycbzLp9D8lFQnPVPFeRvf9qB_eAI4HrSmcRcAgwDcUsCRgZSZSAVgFMgnQX-NMj3cZ9bf9Q/exec").trim();
   if (window.claude || !BASE) return;
 
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
